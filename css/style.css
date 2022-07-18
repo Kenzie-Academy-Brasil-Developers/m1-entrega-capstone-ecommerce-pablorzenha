@@ -22,6 +22,7 @@ header{
     justify-content: center;
     box-shadow: 0px 4px 30px -10px rgba(0, 0, 0, 0.25);
     margin-bottom: 40px;
+    background-color: white;
 }
 
 .headerContainer{
@@ -43,12 +44,15 @@ h1{
     font-size: 30px;
     line-height: 24px;
     }
-a{
+.navContainer button{
+    background-color: white;
+    border: none;
     text-decoration: none;
     color: black;
     font-weight: 400;
     font-size: 16px;
     line-height: 16px;
+    cursor: pointer;
 }
 .navContainer a:hover{
     text-decoration: underline;
@@ -67,6 +71,7 @@ main{
     justify-content: center;
 }
 .containerProdutos{
+    min-width: 1105px;
     display: flex;
     flex-wrap: wrap;
     gap: 40px;
@@ -149,7 +154,12 @@ p:nth-child(5){
     color: #2E245E;
 }
 
-.cardProduto a{
+.cardProduto button{
+    width: 150px;
+    cursor: pointer;
+    text-align: initial;
+    background-color: white;
+    border: none;
     margin: 0px 15px;
     font-family: 'Inter';
     font-style: normal;
@@ -179,7 +189,7 @@ p:nth-child(5){
     border: 1px solid #F5F5F5;
 
 }
-.containerCarrinho section button{
+.containerPesquisa button{
     width: 96px;
     height: 50px;
     left: 1392px;
@@ -195,7 +205,7 @@ p:nth-child(5){
     line-height: 16px;
     cursor: pointer;
 }
-.containerCarrinho section button:hover{
+.containerPesquisa button:hover{
     width: 96px;
     height: 50px;
     left: 1392px;
@@ -234,14 +244,17 @@ p:nth-child(5){
 margin-top: 10px;
 }
 .listaProdutos{
-    padding-top: 82px;
+    
     text-align: center;
     width: 347px;
     height: 214px;
     background-color: #F5F5F5;;
+    overflow-y: auto;
 }
 
+
 .listaProdutos p:nth-child(1){
+    padding-top: 82px;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 700;
@@ -259,3 +272,65 @@ margin-top: 10px;
     line-height: 16px;
     color: #242424;
 }
+
+.produtoCart{
+    display: flex;
+    padding: 15px 0px;
+}
+.produtoCart img{
+    margin: 12.5px 14px;
+    width: 88px;
+    height: 67px
+}
+.produtoCart h3{
+    color: #333333;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+}
+.produtoCart p {
+    font-family: 'Inter';
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 16px;
+color: #2E245E;
+
+}
+
+.produtoCart button{
+    border: none;
+    background-color: #F5F5F5;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    cursor: pointer;
+}
+.produtoCart div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; 
+    align-items: flex-start;
+}
+.detalhesCart{
+    width: 347px;
+    background: #292929;
+}
+
+.detalhesCart section{
+    padding: 12px;
+    justify-content: space-between;
+    display: flex;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: #FFFFFF;
+}
+
+
