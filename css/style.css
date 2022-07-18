@@ -54,12 +54,17 @@ h1{
     line-height: 16px;
     cursor: pointer;
 }
-.navContainer a:hover{
-    text-decoration: underline;
-    color: black;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 16px;
+.navContainer button:hover{
+  
+    -webkit-transform: scale(1.8);
+    -ms-transform: scale(1.8);
+    transform: scale(1.2);
+    
+}
+.navContainer button:active{
+    -webkit-transform: scale(0.7);
+    -ms-transform: scale(0.7);
+    transform: scale(0.9);
 }
 
 
@@ -78,6 +83,7 @@ main{
 }
 
 .cardProduto{
+    transition: all 0.5s;
     padding: 0px;
     width: 296px;
     margin: 10px;
@@ -87,6 +93,8 @@ main{
     border: 4px solid #F5F5F5;
 }
 .cardProduto:hover{
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
     border: 4px solid #2E245E;
 
 }
@@ -169,6 +177,15 @@ p:nth-child(5){
     color: #242424;
     margin-bottom: 15px;
 }
+.cardProduto button:hover{
+    border: 10px solid #136497;
+    border-radius: 50%;
+}
+.cardProduto button:active{
+    border: 10px solid #136497;
+    background-color: #136497;
+    border-radius: 50%;
+}
 
 
 .containerCarrinho{
@@ -180,6 +197,7 @@ p:nth-child(5){
 }
 
 .containerCarrinho section input{
+    transition: all 1s;
     padding: 17px 14px;
     width: 246px;
     height: 50px;
@@ -187,6 +205,13 @@ p:nth-child(5){
     top: 122px;
     background: #F5F5F5;
     border: 1px solid #F5F5F5;
+
+}
+.containerCarrinho section input:focus{
+    -webkit-filter: drop-shadow(15px 10px 5px rgba(0,0,0,.5));
+    filter: drop-shadow(15px 10px 5px rgba(0,0,0,.5));
+    width: 310px;
+    transform: translate(-50px);
 
 }
 .containerPesquisa button{
