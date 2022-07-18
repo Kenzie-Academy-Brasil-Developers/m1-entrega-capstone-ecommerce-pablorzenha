@@ -65,7 +65,7 @@ function renderizarVitrine(array, categoriaSelecionada){
                 //img
                 const figureProduto         = document.createElement("figure")
                 const imgProduto            = document.createElement("img")
-                imgProduto.setAttribute("src",`${elem.img}`)
+                imgProduto.setAttribute("src",elem.img.slice(1))
                 figureProduto.appendChild(imgProduto)
                 //categoria
                 const categoriaTipo = document.createElement("span")
@@ -101,7 +101,7 @@ function renderizarVitrine(array, categoriaSelecionada){
             //img
             const figureProduto             = document.createElement("figure")
             const imgProduto                = document.createElement("img")
-            imgProduto.setAttribute("src",`${elem.img}`)
+            imgProduto.setAttribute("src",elem.img.slice(1))
             figureProduto.appendChild(imgProduto)
             //categoria
             const categoriaTipo = document.createElement("span")
@@ -225,7 +225,7 @@ function renderizarCart(){
         //crio img e textos
             //img
             const imgCart                   = document.createElement("img")
-            imgCart.setAttribute("src",elem.img)
+            imgCart.setAttribute("src",elem.img.slice(1))
             const descricoes                = document.createElement("div")
             //descricoes
             const tituloCart                = document.createElement("h3")
