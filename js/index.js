@@ -201,13 +201,8 @@ buttonBusca.addEventListener("click",buscaProdutos)
 
 //FUNCOES ADICIONAR, REMOVER E PESQUISA
 function adicionandoProduto(event){
-    if(event.target.tagName == "BUTTON"){
-            secaoCart.innerText             = ""
-            data.forEach(elem => {
-                (elem.id == event.target.id? carrinhoCompras.push(elem) :"")    
-            })
-            renderizarCart()
-    }
+    (event.target.tagName == "BUTTON" ?secaoCart.innerText="" + data.forEach(elem => {(elem.id == event.target.id? carrinhoCompras.push(elem) :"")}) : "")
+    renderizarCart() 
 }
 
 function renderizarCart(){
