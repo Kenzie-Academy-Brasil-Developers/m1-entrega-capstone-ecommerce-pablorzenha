@@ -274,5 +274,6 @@ function produtosPorCategorias(event){
 function buscaProdutos(){
     arrayDeBusca.length                     = 0
     data.forEach(elem => {(elem.nameItem.toLowerCase().includes(inputBusca.value.toLowerCase()) == true ? arrayDeBusca.push(elem) : "")})
+    inputBusca.value = ""
     renderizarVitrine(arrayDeBusca,"Todos")
 }
