@@ -1,8 +1,8 @@
 //BODY E ARRAYS
-const corpo                                 = document.body
-let arrayCategorias                         = ["Todos","Acessórios","Calçados","Camisetas"]
-let arrayDeBusca                            = []
-let carrinhoCompras                         = []
+const corpo                                     = document.body
+let arrayCategorias                             = ["Todos","Acessórios","Calçados","Camisetas"]
+let arrayDeBusca                                = []
+let carrinhoCompras                             = []
 
 //INICIO RENDERIZAÇÃO INDEX DO SITE
 function renderizarSite(){
@@ -54,17 +54,67 @@ function renderizarSite(){
 }
 
 function renderizarVitrine(array, categoriaSelecionada){
-    const containerProdutos                 = document.querySelector(".containerProdutos")
-    containerProdutos.innerText             = ""
-    if(categoriaSelecionada == "Todos"){
-        array.forEach(elem => { 
+    const containerProdutos                     = document.querySelector(".containerProdutos")
+    containerProdutos.innerText                 = ""
+
+        if(array.length == 0 || (array.every(elem => elem.tag[0] !== categoriaSelecionada) && categoriaSelecionada !== "Todos") ){ 
+        const nenhumProduto = document.createElement("p")
+        nenhumProduto.setAttribute("class","nenhumProduto")
+        nenhumProduto.innerText = "Nenhum produto encontrado:"
+        const ulNenhum =  document.createElement("ul")
+        const liUm      = document.createElement("li")
+        liUm.innerText  = "Revise a ortografia da palavra"
+        const liDois      = document.createElement("li")
+        liDois.innerText = "Utilize palavras mais genéricas ou menos palavras."
+        const liTres      = document.createElement("li")
+        liTres.innerText    =   "Navegue pelas categorias para encontrar um produto similar"
+        ulNenhum.append(liUm,liDois,liTres)
+        containerProdutos.append(nenhumProduto,ulNenhum)
+        }else if(categoriaSelecionada == "Todos"){
+            array.forEach(elem => { 
+                //Card
+                const cardProduto               = document.createElement("div")
+                cardProduto.setAttribute("class","cardProduto")
+                //elementos dentro card
+                    //img
+                    const figureProduto         = document.createElement("figure")
+                    const imgProduto            = document.createElement("img")
+                    imgProduto.setAttribute("src",elem.img.slice(1))
+                    figureProduto.appendChild(imgProduto)
+                    //categoria
+                    const categoriaTipo = document.createElement("span")
+                    if(elem.tag[0] == "Camisetas"){
+                        categoriaTipo.setAttribute("class","cardCamiseta")
+                    }else{
+                        categoriaTipo.setAttribute("class","cardAcessorio")
+                    }
+                    const categoriaNome         = document.createElement("p")
+                    categoriaNome.innerText     = elem.tag[0]
+                    categoriaTipo.appendChild(categoriaNome)
+                    //Descricoes
+                    const nomeProduto           = document.createElement("h2")
+                    const descricaoProduto      = document.createElement("p")
+                    const precoProduto          = document.createElement("p")
+                    const btnProduto            = document.createElement("button")
+                    btnProduto.setAttribute("id",elem.id)
+                    nomeProduto.innerText       = elem.nameItem
+                    descricaoProduto.innerText  = elem.description
+                    precoProduto.innerText      = `R$ ${elem.value.toFixed(2)}`
+                    btnProduto.innerText        = elem.addCart
+                    //inserindo no card
+                    cardProduto.append(figureProduto,categoriaTipo,nomeProduto,descricaoProduto,precoProduto,btnProduto)
+                    containerProdutos.appendChild(cardProduto)
+                }) 
+        }else{
+            array.forEach(elem => { 
+            if(elem.tag[0] == categoriaSelecionada){
             //Card
-            const cardProduto               = document.createElement("div")
+            const cardProduto                   = document.createElement("div")
             cardProduto.setAttribute("class","cardProduto")
             //elementos dentro card
                 //img
-                const figureProduto         = document.createElement("figure")
-                const imgProduto            = document.createElement("img")
+                const figureProduto             = document.createElement("figure")
+                const imgProduto                = document.createElement("img")
                 imgProduto.setAttribute("src",elem.img.slice(1))
                 figureProduto.appendChild(imgProduto)
                 //categoria
@@ -74,61 +124,25 @@ function renderizarVitrine(array, categoriaSelecionada){
                 }else{
                     categoriaTipo.setAttribute("class","cardAcessorio")
                 }
-                const categoriaNome         = document.createElement("p")
-                categoriaNome.innerText     = elem.tag[0]
+                const categoriaNome             = document.createElement("p")
+                categoriaNome.innerText         = elem.tag[0]
                 categoriaTipo.appendChild(categoriaNome)
                 //Descricoes
-                const nomeProduto           = document.createElement("h2")
-                const descricaoProduto      = document.createElement("p")
-                const precoProduto          = document.createElement("p")
-                const btnProduto            = document.createElement("button")
+                const nomeProduto               = document.createElement("h2")
+                const descricaoProduto          = document.createElement("p")
+                const precoProduto              = document.createElement("p")
+                const btnProduto                = document.createElement("button")
                 btnProduto.setAttribute("id",elem.id)
-                nomeProduto.innerText       = elem.nameItem
-                descricaoProduto.innerText  = elem.description
-                precoProduto.innerText      = `R$ ${elem.value.toFixed(2)}`
-                btnProduto.innerText        = elem.addCart
+                nomeProduto.innerText           = elem.nameItem
+                descricaoProduto.innerText      = elem.description
+                precoProduto.innerText          = `R$ ${elem.value.toFixed(2)}`
+                btnProduto.innerText            = elem.addCart
                 //inserindo no card
                 cardProduto.append(figureProduto,categoriaTipo,nomeProduto,descricaoProduto,precoProduto,btnProduto)
                 containerProdutos.appendChild(cardProduto)
-            }) 
-    }else{
-        array.forEach(elem => { 
-        if(elem.tag[0] == categoriaSelecionada){
-        //Card
-        const cardProduto                   = document.createElement("div")
-        cardProduto.setAttribute("class","cardProduto")
-        //elementos dentro card
-            //img
-            const figureProduto             = document.createElement("figure")
-            const imgProduto                = document.createElement("img")
-            imgProduto.setAttribute("src",elem.img.slice(1))
-            figureProduto.appendChild(imgProduto)
-            //categoria
-            const categoriaTipo = document.createElement("span")
-            if(elem.tag[0] == "Camisetas"){
-                categoriaTipo.setAttribute("class","cardCamiseta")
-            }else{
-                categoriaTipo.setAttribute("class","cardAcessorio")
             }
-            const categoriaNome             = document.createElement("p")
-            categoriaNome.innerText         = elem.tag[0]
-            categoriaTipo.appendChild(categoriaNome)
-            //Descricoes
-            const nomeProduto               = document.createElement("h2")
-            const descricaoProduto          = document.createElement("p")
-            const precoProduto              = document.createElement("p")
-            const btnProduto                = document.createElement("button")
-            btnProduto.setAttribute("id",elem.id)
-            nomeProduto.innerText           = elem.nameItem
-            descricaoProduto.innerText      = elem.description
-            precoProduto.innerText          = `R$ ${elem.value.toFixed(2)}`
-            btnProduto.innerText            = elem.addCart
-            //inserindo no card
-            cardProduto.append(figureProduto,categoriaTipo,nomeProduto,descricaoProduto,precoProduto,btnProduto)
-            containerProdutos.appendChild(cardProduto)
+            })
         }
-        })
-    }
 }
 
 function renderizarCarrinho(){
@@ -175,11 +189,11 @@ index()
 
 
 //ESCUTADORES
-const secaoVitrine                          = document.querySelector(".containerProdutos")
-const secaoCart                             = document.querySelector(".listaProdutos")
-const navigation                            = document.querySelector(".navContainer")
-let inputBusca                              = document.querySelector(".containerPesquisa input")
-let buttonBusca                             = document.querySelector(".containerPesquisa button")
+const secaoVitrine                              = document.querySelector(".containerProdutos")
+const secaoCart                                 = document.querySelector(".listaProdutos")
+const navigation                                = document.querySelector(".navContainer")
+let inputBusca                                  = document.querySelector(".containerPesquisa input")
+let buttonBusca                                 = document.querySelector(".containerPesquisa button")
 secaoVitrine.addEventListener("click",adicionandoProduto)
 secaoCart.addEventListener("click",removerProduto)
 navigation.addEventListener("click",produtosPorCategorias)
@@ -188,34 +202,18 @@ buttonBusca.addEventListener("click",buscaProdutos)
 //FUNCOES ADICIONAR, REMOVER E PESQUISA
 function adicionandoProduto(event){
     if(event.target.tagName == "BUTTON"){
-        const listaProdutos                 = document.querySelector(".listaProdutos")
-        let numeroID = event.target.id
-            //Apaga textos
-            listaProdutos.innerText         = ""
-            
-            //percorro procurando id e adicionando no carrinho
+            secaoCart.innerText             = ""
             data.forEach(elem => {
-                if(elem.id == numeroID){
-                    carrinhoCompras.push(elem) 
-                }
+                (elem.id == event.target.id? carrinhoCompras.push(elem) :"")    
             })
             renderizarCart()
     }
- 
-}
-
-function removerProduto(event){
-    if(event.target.tagName == "BUTTON"){
-        carrinhoCompras.splice(event.target.id,1)
-    }
-    renderizarCart() 
 }
 
 function renderizarCart(){
    if(carrinhoCompras.length > 0){
-    const listaProdutos = document.querySelector(".listaProdutos")
     const detalhesCart = document.querySelector(".detalhesCart")
-    listaProdutos.innerText                 = ""
+    secaoCart.innerText                 = ""
     detalhesCart.innerText                  = ""
     carrinhoCompras.forEach((elem,index) => {
         //crio o cart no carrinho
@@ -238,7 +236,7 @@ function renderizarCart(){
             descricoes.append(tituloCart,precoCart,btnCart)
         //adiciono variaveis no cart
         produtoCart.append(imgCart,descricoes)
-        listaProdutos.appendChild(produtoCart)
+        secaoCart.appendChild(produtoCart)
     })
 
     //Soma quantidade e total
@@ -256,37 +254,30 @@ function renderizarCart(){
     totalContainer.append(totalTexto,totalValor)
     detalhesCart.append(quantidadeContainer,totalContainer)
 }else{
-    const listaProdutos = document.querySelector(".listaProdutos")
     const detalhesCart = document.querySelector(".detalhesCart")
-    listaProdutos.innerText                 = ""
+    secaoCart.innerText                 = ""
     detalhesCart.innerText                  = ""
     const carrinhoVazio                     = document.createElement("p")
     carrinhoVazio.innerText                 = "Carrinho Vázio"
     const adicioneItens                     = document.createElement("p")
     adicioneItens.innerText                 = "Adicione itens"
-    listaProdutos.append(carrinhoVazio,adicioneItens)
+    secaoCart.append(carrinhoVazio,adicioneItens)
 }
+}
+
+function removerProduto(event){
+    (event.target.tagName == "BUTTON" ? carrinhoCompras.splice(event.target.id,1) : "" )
+    renderizarCart() 
 }
 
 function produtosPorCategorias(event){
     if(event.target.tagName == "BUTTON"){
-      
-       for(let i = 0; i< arrayCategorias.length;i++){
-        if(i == Number(event.target.id)){
-            renderizarVitrine(data, arrayCategorias[i])
-        }
-       }
+        arrayCategorias.forEach((elem,index) => (index == Number(event.target.id) ? renderizarVitrine(data, elem) : ""))
     }
 }
 
-
 function buscaProdutos(){
-    let valorBusca = inputBusca.value.toLowerCase()
-    arrayDeBusca.length = 0
-    data.forEach(elem => {    
-        if(elem.nameItem.toLowerCase().includes(valorBusca) == true){
-            arrayDeBusca.push(elem)
-        }
-    })
+    arrayDeBusca.length                     = 0
+    data.forEach(elem => {(elem.nameItem.toLowerCase().includes(inputBusca.value.toLowerCase()) == true ? arrayDeBusca.push(elem) : "")})
     renderizarVitrine(arrayDeBusca,"Todos")
 }
