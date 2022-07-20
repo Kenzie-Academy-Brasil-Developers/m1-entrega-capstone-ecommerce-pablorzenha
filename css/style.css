@@ -200,7 +200,7 @@ p:nth-child(5){
     position: absolute;
     bottom: 0;
     left: 0;
-    transition: 0.5s ease-in-out;
+    transition: 0.3s all;
 }
 .cardProduto button:hover::after{
     width: 100%;
