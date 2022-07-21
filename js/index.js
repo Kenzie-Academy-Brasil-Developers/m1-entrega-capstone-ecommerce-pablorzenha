@@ -242,11 +242,13 @@ function renderizarCart(){
             const tituloCart                = document.createElement("h3")
             tituloCart.innerText            = `${getOccurrences(carrinhoCompras,elem)}x ${elem.nameItem}`
             const precoCart                 = document.createElement("p")
-            precoCart.innerText             = `R$ ${elem.value.toFixed(2)}(un.) / R$ ${(getOccurrences(carrinhoCompras,elem)*elem.value).toFixed(2)}(total)`
+            precoCart.innerText             = `R$ ${elem.value.toFixed(2)}(un.)`              
+            const precoCartTotal            = document.createElement("p")
+            precoCartTotal.innerText        = `R$ ${(getOccurrences(carrinhoCompras,elem)*elem.value).toFixed(2)}(total)`
             const btnCart                   = document.createElement("button")
             btnCart.setAttribute("id",index)
             btnCart.innerText = "Remover"
-            descricoes.append(tituloCart,precoCart,btnCart)
+            descricoes.append(tituloCart,precoCart,precoCartTotal,btnCart)
         //adiciono variaveis no cart
         produtoCart.append(imgCart,descricoes)
         secaoCart.appendChild(produtoCart)
