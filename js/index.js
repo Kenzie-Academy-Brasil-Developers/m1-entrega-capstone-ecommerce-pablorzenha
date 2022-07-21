@@ -53,23 +53,37 @@ function renderizarSite(){
    
 }
 
-function renderizarVitrine(array, categoriaSelecionada){
+function renderizarVitrine(array, categoriaSelecionada,value){
     const containerProdutos                     = document.querySelector(".containerProdutos")
     containerProdutos.innerText                 = ""
 
         if(array.length == 0 || (array.every(elem => elem.tag[0] !== categoriaSelecionada) && categoriaSelecionada !== "Todos") ){ 
-        const nenhumProduto = document.createElement("p")
-        nenhumProduto.setAttribute("class","nenhumProduto")
-        nenhumProduto.innerText = "Nenhum produto encontrado:"
-        const ulNenhum =  document.createElement("ul")
-        const liUm      = document.createElement("li")
-        liUm.innerText  = "Revise a ortografia da palavra"
-        const liDois      = document.createElement("li")
-        liDois.innerText = "Utilize palavras mais genéricas ou menos palavras."
-        const liTres      = document.createElement("li")
-        liTres.innerText    =   "Navegue pelas categorias para encontrar um produto similar"
-        ulNenhum.append(liUm,liDois,liTres)
-        containerProdutos.append(nenhumProduto,ulNenhum)
+            if(array.length == 0){
+            const valueNenhum = document.createElement("h2")
+            valueNenhum.innerText = `Nenhum item encontrado para '${value}'`
+            valueNenhum.setAttribute("class","nenhumProduto")
+
+            const ulNenhum =  document.createElement("ul")
+            const liUm      = document.createElement("li")
+            liUm.innerText  = "Revise a ortografia da palavra"
+            const liDois      = document.createElement("li")
+            liDois.innerText = "Utilize palavras mais genéricas ou menos palavras."
+            const liTres      = document.createElement("li")
+            liTres.innerText    =   "Navegue pelas categorias para encontrar um produto similar"
+            ulNenhum.append(liUm,liDois,liTres)
+            containerProdutos.append(valueNenhum,ulNenhum)
+            inputBusca.value = ""
+            }else{
+            const valueNenhum = document.createElement("h2")
+            valueNenhum.innerText = `Nenhum item encontrado na categoria '${categoriaSelecionada}'`
+            valueNenhum.setAttribute("class","nenhumProduto")
+            const ulNenhum =  document.createElement("ul")
+            const liTres      = document.createElement("li")
+            liTres.innerText    =   "Navegue pelas categorias para encontrar um produto similar"
+            ulNenhum.append(liTres)
+            containerProdutos.append(valueNenhum,ulNenhum)
+            inputBusca.value = ""
+            }
         }else if(categoriaSelecionada == "Todos"){
             array.forEach(elem => { 
                 //Card
@@ -185,8 +199,6 @@ function index(){
 }
 
 index()
-//FINAL DA RENDERIZAÇÃO INDEX DO SITE
-
 
 //ESCUTADORES
 const secaoVitrine                              = document.querySelector(".containerProdutos")
@@ -274,6 +286,5 @@ function produtosPorCategorias(event){
 function buscaProdutos(){
     arrayDeBusca.length                     = 0
     data.forEach(elem => {(elem.nameItem.toLowerCase().includes(inputBusca.value.toLowerCase()) == true ? arrayDeBusca.push(elem) : "")})
-    inputBusca.value = ""
-    renderizarVitrine(arrayDeBusca,"Todos")
+    renderizarVitrine(arrayDeBusca,"Todos",inputBusca.value)
 }
