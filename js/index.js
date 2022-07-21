@@ -1,37 +1,39 @@
-//BODY E ARRAYS
+//BODY, ARRAYS E IMPORTANTES
 const corpo                                     = document.body
 let arrayCategorias                             = ["Todos","Acessórios","Calçados","Camisetas"]
 let arrayDeBusca                                = []
 let carrinhoCompras                             = []
+let carrinhoFiltro                              = []
+let getOccurrences = ( array , value ) => array.reduce((acc, item) => value === item ? acc + 1: acc, 0) 
 
 //INICIO RENDERIZAÇÃO INDEX DO SITE
 function renderizarSite(){
     //cabeçalho
-        const header                        = document.createElement("header")
+        const header                            = document.createElement("header")
         //container flex
-        const headerContainer               = document.createElement("div")
+        const headerContainer                   = document.createElement("div")
         headerContainer.setAttribute("class","headerContainer")
         //container logo e nav
-        const logoContainer                 = document.createElement("logoContainer")
-        const navContainer                  = document.createElement("navContainer")
+        const logoContainer                     = document.createElement("logoContainer")
+        const navContainer                      = document.createElement("navContainer")
         logoContainer.setAttribute("class","logoContainer")
         navContainer.setAttribute("class","navContainer")
         // logo e botoes do nav
-        const logo                          = document.createElement("h1")
-        const btnTodos                      = document.createElement("button")
+        const logo                              = document.createElement("h1")
+        const btnTodos                          = document.createElement("button")
         btnTodos.setAttribute("id",0)
-        const btnAcessor                    = document.createElement("button")
+        const btnAcessor                        = document.createElement("button")
         btnAcessor.setAttribute("id",1)
-        const btnCalca                      = document.createElement("button")
+        const btnCalca                          = document.createElement("button")
         btnCalca.setAttribute("id",2)
-        const btnCamis                      = document.createElement("button")
+        const btnCamis                          = document.createElement("button")
         btnCamis.setAttribute("id",3)
         //texto
-        logo.innerText                      = "WearTake"
-        btnTodos.innerText                  = "Todos"
-        btnAcessor.innerText                = "Acessórios"
-        btnCalca.innerText                  = "Calçados"
-        btnCamis.innerText                  = "Camiseta"
+        logo.innerText                          = "WearTake"
+        btnTodos.innerText                      = "Todos"
+        btnAcessor.innerText                    = "Acessórios"
+        btnCalca.innerText                      = "Calçados"
+        btnCamis.innerText                      = "Camiseta"
         // append
         navContainer.append(btnTodos,btnAcessor,btnCalca,btnCamis)
         logoContainer.appendChild(logo)
@@ -63,26 +65,26 @@ function renderizarVitrine(array, categoriaSelecionada,value){
             valueNenhum.innerText = `Nenhum item encontrado para '${value}'`
             valueNenhum.setAttribute("class","nenhumProduto")
 
-            const ulNenhum =  document.createElement("ul")
-            const liUm      = document.createElement("li")
-            liUm.innerText  = "Revise a ortografia da palavra"
-            const liDois      = document.createElement("li")
-            liDois.innerText = "Utilize palavras mais genéricas ou menos palavras."
-            const liTres      = document.createElement("li")
-            liTres.innerText    =   "Navegue pelas categorias para encontrar um produto similar"
+            const ulNenhum                      =  document.createElement("ul")
+            const liUm                          = document.createElement("li")
+            liUm.innerText                      = "Revise a ortografia da palavra"
+            const liDois                        = document.createElement("li")
+            liDois.innerText                    = "Utilize palavras mais genéricas ou menos palavras."
+            const liTres                        = document.createElement("li")
+            liTres.innerText                    =   "Navegue pelas categorias para encontrar um produto similar"
             ulNenhum.append(liUm,liDois,liTres)
             containerProdutos.append(valueNenhum,ulNenhum)
-            inputBusca.value = ""
+            inputBusca.value                    = ""
             }else{
-            const valueNenhum = document.createElement("h2")
-            valueNenhum.innerText = `Nenhum item encontrado na categoria '${categoriaSelecionada}'`
+            const valueNenhum                   = document.createElement("h2")
+            valueNenhum.innerText               = `Nenhum item encontrado na categoria '${categoriaSelecionada}'`
             valueNenhum.setAttribute("class","nenhumProduto")
-            const ulNenhum =  document.createElement("ul")
-            const liTres      = document.createElement("li")
-            liTres.innerText    =   "Navegue pelas categorias para encontrar um produto similar"
+            const ulNenhum                      =  document.createElement("ul")
+            const liTres                        = document.createElement("li")
+            liTres.innerText                    =   "Navegue pelas categorias para encontrar um produto similar"
             ulNenhum.append(liTres)
             containerProdutos.append(valueNenhum,ulNenhum)
-            inputBusca.value = ""
+            inputBusca.value                    = ""
             }
         }else if(categoriaSelecionada == "Todos"){
             array.forEach(elem => { 
@@ -160,32 +162,32 @@ function renderizarVitrine(array, categoriaSelecionada,value){
 }
 
 function renderizarCarrinho(){
-    const containerCarrinho                 = document.querySelector(".containerCarrinho")
-    containerCarrinho.innerText             = ""
+    const containerCarrinho                     = document.querySelector(".containerCarrinho")
+    containerCarrinho.innerText                 = ""
     //Pesquisa
-        const containerPesquisa             = document.createElement("section")
+        const containerPesquisa                 = document.createElement("section")
         containerPesquisa.setAttribute("class","containerPesquisa")
-        const inputPesquisa                 = document.createElement("input")
+        const inputPesquisa                     = document.createElement("input")
         inputPesquisa.setAttribute("placeholder","Digite aqui sua pesquisa")
-        const buttonPesquisa                = document.createElement("button")
-        buttonPesquisa.innerText            = "Pesquisar"
+        const buttonPesquisa                    = document.createElement("button")
+        buttonPesquisa.innerText                = "Pesquisar"
         containerPesquisa.append(inputPesquisa,buttonPesquisa)
     
     //Carrinho
-        const carrinhoDeCompras             = document.createElement("section")
+        const carrinhoDeCompras                 = document.createElement("section")
         carrinhoDeCompras.setAttribute("class","carrinhoDeCompras")
-        const tituloCarrinho                = document.createElement("h2")
-        tituloCarrinho.innerText            = "Carrinho de Compras"
+        const tituloCarrinho                    = document.createElement("h2")
+        tituloCarrinho.innerText                = "Carrinho de Compras"
         //itens carrinho
-        const listaProdutos                 = document.createElement("div")
+        const listaProdutos                     = document.createElement("div")
         listaProdutos.setAttribute("class","listaProdutos")
-        const detalhesCart                  = document.createElement("div")
+        const detalhesCart                      = document.createElement("div")
         detalhesCart.setAttribute("class","detalhesCart")
         //condicao para carrinho vazio
-        const carrinhoVazio                 = document.createElement("p")
-        carrinhoVazio.innerText             = "Carrinho Vázio"
-        const adicioneItens                 = document.createElement("p")
-        adicioneItens.innerText             = "Adicione itens"
+        const carrinhoVazio                     = document.createElement("p")
+        carrinhoVazio.innerText                 = "Carrinho Vázio"
+        const adicioneItens                     = document.createElement("p")
+        adicioneItens.innerText                 = "Adicione itens"
         listaProdutos.append(carrinhoVazio,adicioneItens)
         carrinhoDeCompras.append(tituloCarrinho,listaProdutos,detalhesCart)
         containerCarrinho.append(containerPesquisa,carrinhoDeCompras)
@@ -213,8 +215,7 @@ buttonBusca.addEventListener("click",buscaProdutos)
 
 //FUNCOES ADICIONAR, REMOVER E PESQUISA
 function adicionandoProduto(event){
-    (event.target.tagName == "BUTTON" ?secaoCart.innerText="" + data.forEach(elem => {(elem.id == event.target.id? carrinhoCompras.push(elem) :"")}) : "")
-    renderizarCart() 
+    (event.target.tagName == "BUTTON" ?secaoCart.innerText="" + data.forEach(elem => {(elem.id == event.target.id? carrinhoCompras.push(elem) :"")}) : ""); renderizarCart() 
 }
 
 function renderizarCart(){
@@ -222,11 +223,16 @@ function renderizarCart(){
     const detalhesCart = document.querySelector(".detalhesCart")
     secaoCart.innerText                 = ""
     detalhesCart.innerText                  = ""
-    carrinhoCompras.forEach((elem,index) => {
+    carrinhoCompras.forEach(elem => {
+        if(carrinhoFiltro.includes(elem) == false){
+            carrinhoFiltro.push(elem)
+        }
+    })
+
+    carrinhoFiltro.forEach((elem,index) => {
         //crio o cart no carrinho
         let produtoCart                     =  document.createElement("div")
         produtoCart.setAttribute("class","produtoCart")
-        
         //crio img e textos
             //img
             const imgCart                   = document.createElement("img")
@@ -234,9 +240,9 @@ function renderizarCart(){
             const descricoes                = document.createElement("div")
             //descricoes
             const tituloCart                = document.createElement("h3")
-            tituloCart.innerText            = elem.nameItem
+            tituloCart.innerText            = `${getOccurrences(carrinhoCompras,elem)}x ${elem.nameItem}`
             const precoCart                 = document.createElement("p")
-            precoCart.innerText             = `R$ ${elem.value.toFixed(2)}`
+            precoCart.innerText             = `R$ ${elem.value.toFixed(2)}(un.) / R$ ${(getOccurrences(carrinhoCompras,elem)*elem.value).toFixed(2)}(total)`
             const btnCart                   = document.createElement("button")
             btnCart.setAttribute("id",index)
             btnCart.innerText = "Remover"
@@ -273,8 +279,18 @@ function renderizarCart(){
 }
 
 function removerProduto(event){
-    (event.target.tagName == "BUTTON" ? carrinhoCompras.splice(event.target.id,1) : "" )
-    renderizarCart() 
+    if(event.target.tagName == "BUTTON"){ 
+        if(getOccurrences(carrinhoCompras,carrinhoCompras[carrinhoCompras.indexOf(carrinhoFiltro[event.target.id])]) == 1){
+            let elemento = carrinhoFiltro[event.target.id]
+            carrinhoCompras.splice(carrinhoCompras.indexOf(elemento),1)
+            carrinhoFiltro.splice(carrinhoFiltro.indexOf(elemento),1)
+            console.log(elemento,carrinhoFiltro,"oi")
+        }else{
+        carrinhoCompras.splice(carrinhoCompras.indexOf(carrinhoFiltro[event.target.id]),1)
+        }
+        renderizarCart() 
+    }
+    
 }
 
 function produtosPorCategorias(event){
